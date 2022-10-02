@@ -59,12 +59,12 @@ userRouter.put('/:id', async (req, res) => {
 
 // delete the user or delete the user's account
 userRouter.delete('/:id', async (req, res) => {
-    if (req.body.userId === req.params.id) {
+    if (req.body.userId == req.params.id) {
         try {
-            const user = await User.findById(req.params.id);
             try {
+                const user = await User.findById(req.params.id);
                 await Post.deleteMany({ username: user.username });
-                const user = await User.findByIdAndDelete(req.params.id);
+                await User.findByIdAndDelete(req.params.id);
                 return res.status(200).send('User has been deleted');
             } catch (err) {
                 return res.status(500).send(err);
