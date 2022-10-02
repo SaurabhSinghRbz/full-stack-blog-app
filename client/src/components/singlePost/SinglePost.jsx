@@ -47,7 +47,7 @@ export default function SinglePost() {
               </Link>
             </b>
           </span>
-          <span>1 day ago</span>
+          <span>{new Date(post.createdAt).toDateString()}</span>
         </div>
         <p className="singlePostDesc">
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iste error
