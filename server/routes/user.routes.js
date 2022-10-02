@@ -4,6 +4,26 @@ const bcrypt = require('bcrypt');
 const Post = require('../models/Post');
 
 
+// get all users
+userRouter.get('/', async (req, res) => {
+    try {
+        const users = await User.find({}, { password: 0 });
+        return res.status(200).send(users);
+    } catch (err) {
+        return res.status(500).send(err);
+    }
+});
+
+
+// get a user by id
+userRouter.get('/:id', async (req, res) => {
+    try {
+        const user = await User.findById(req.params.id, { password: 0 });
+        return res.status(200).send(user);
+    } catch (err) {
+        return res.status(500).send(err);
+    }
+});
 
 
 
