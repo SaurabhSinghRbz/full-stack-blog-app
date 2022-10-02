@@ -1,1 +1,1 @@
-# complete-blog-rest-api
+# Full-Stack-Blog-App
