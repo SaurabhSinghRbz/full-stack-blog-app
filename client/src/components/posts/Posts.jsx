@@ -5,11 +5,7 @@ export default function Posts({ posts }) {
   return (
     <div className="posts">
       {posts.map((post) => (
-        <Post
-          key={post._id}
-          post={post}
-          img="https://images.pexels.com/photos/6758029/pexels-photo-6758029.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-        />
+        <Post key={post._id} post={post} />
       ))}
       {/* <Post img="https://images.pexels.com/photos/6685428/pexels-photo-6685428.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" />
       <Post img="https://images.pexels.com/photos/6758029/pexels-photo-6758029.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />

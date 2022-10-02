@@ -2,9 +2,9 @@ import { Link } from "react-router-dom";
 import "./post.css";
 import defaultBlog from "../../Images/defaultBlog.jpg";
 
-export default function Post({ post, img }) {
+export default function Post({ post }) {
   let blogPic = post.photo;
-  if (blogPic == undefined || blogPic == "") {
+  if (blogPic === undefined || blogPic === "") {
     blogPic = defaultBlog;
   }
   return (

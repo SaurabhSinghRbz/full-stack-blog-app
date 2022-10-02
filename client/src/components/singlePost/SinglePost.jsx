@@ -1,17 +1,38 @@
-import { Link } from "react-router-dom";
+import axios from "axios";
+import React from "react";
+import { Link, useLocation } from "react-router-dom";
 import "./singlePost.css";
+import defaultBlog from "../../Images/defaultBlog.jpg";
 
 export default function SinglePost() {
+  const [post, setPost] = React.useState({});
+
+  const location = useLocation();
+  const postId = location.pathname.split("/")[2];
+
+  React.useEffect(() => {
+    const fetchPost = async () => {
+      try {
+        const res = await axios.get(
+          `http://localhost:8080/api/posts/${postId}`
+        );
+        setPost(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchPost();
+  }, [postId]);
+  let blogPic = post.photo;
+  if (blogPic === undefined || blogPic === "") {
+    blogPic = defaultBlog;
+  }
   return (
     <div className="singlePost">
       <div className="singlePostWrapper">
-        <img
-          className="singlePostImg"
-          src="https://images.pexels.com/photos/6685428/pexels-photo-6685428.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-          alt=""
-        />
+        <img className="singlePostImg" src={blogPic} alt="blogPic" />
         <h1 className="singlePostTitle">
-          Lorem ipsum dolor
+          {post.title}
           <div className="singlePostEdit">
             <i className="singlePostIcon far fa-edit"></i>
             <i className="singlePostIcon far fa-trash-alt"></i>
@@ -22,7 +43,7 @@ export default function SinglePost() {
             Author:
             <b className="singlePostAuthor">
               <Link className="link" to="/posts?username=Safak">
-                Safak
+                {post.username}
               </Link>
             </b>
           </span>
