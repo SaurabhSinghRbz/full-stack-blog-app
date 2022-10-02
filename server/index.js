@@ -1,6 +1,7 @@
 const express = require('express');
 const database = require('./configs/db');
 const authRouter = require('./routes/auth');
+const categoryRouter = require('./routes/categoery.routes');
 const postRouter = require('./routes/post.routes');
 const userRouter = require('./routes/user.routes');
 const app = express();
@@ -14,6 +15,7 @@ app.get('/', (req, res) => {
 app.use("/api/auth", authRouter);
 app.use("/api/users", userRouter);
 app.use("/api/posts", postRouter);
+app.use("/api/categories", categoryRouter);
 
 app.listen(8080, () => {
     database();
