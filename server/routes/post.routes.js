@@ -5,8 +5,21 @@ const Post = require('../models/Post');
 
 // get all posts
 postRouter.get('/', async (req, res) => {
+    const username = req.query.user;
+    const catName = req.query.categories;
     try {
-        const posts = await Post.find();
+        let posts;
+        if (username) {
+            posts = await Post.find({ username });
+        } else if (catName) {
+            posts = await Post.find({
+                categories: {
+                    $in: [catName],
+                },
+            });
+        } else {
+            posts = await Post.find();
+        }
         return res.status(200).send(posts);
     } catch (err) {
         return res.status(500).send(err);
