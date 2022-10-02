@@ -1,11 +1,11 @@
-const Router = require('express').Router();
+const AuthRouter = require('express').Router();
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
 
 
 
 // REGISTER
-Router.post('/register', async (req, res) => {
+AuthRouter.post('/register', async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
     const newUser = new User({
@@ -26,7 +26,7 @@ Router.post('/register', async (req, res) => {
 
 
 // LOGIN
-Router.post('/login', async (req, res) => {
+AuthRouter.post('/login', async (req, res) => {
     try {
         const user = await User.findOne({ email: req.body.email });
         if (!user) {
@@ -46,4 +46,4 @@ Router.post('/login', async (req, res) => {
 });
 
 
-module.exports = Router;
+module.exports = AuthRouter;
