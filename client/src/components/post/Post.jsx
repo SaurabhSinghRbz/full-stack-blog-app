@@ -14,10 +14,7 @@ export default function Post({ post }) {
         <div className="postCats">
           {post.categories.map((c, idx) => (
             <span className="postCat" key={idx}>
-              <Link
-                className="link"
-                to={`http://localhost:8080/api/posts/?categories=${c}`}
-              >
+              <Link className="link" to={`posts/?categories=${c}`}>
                 {c}
               </Link>
             </span>
